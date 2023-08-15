@@ -4,6 +4,7 @@ import { ListGroup, Button, Row, Col, Form, Image } from "react-bootstrap";
 import Rating from "./Rating";
 import { AiFillDelete } from "react-icons/ai";
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
   const {
@@ -79,8 +80,11 @@ const Cart = () => {
         <div className="filters summary">
           <span className="title">Subtotal ({cart.length}) Items</span>
           <span style={{ fontWeight: 700, fontSize: 20 }}>Total: ${total}</span>
+
           <Button type="button" disabled={cart.length === 0}>
-            Proceed to Checkout
+            <Link to="/checkout" style={{ color: "#fff" }}>
+              Proceed to Checkout
+            </Link>
           </Button>
         </div>
       </div>
