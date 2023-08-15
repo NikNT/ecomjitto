@@ -20,9 +20,11 @@ const Login = () => {
 
   const formInputChange = (formField, value) => {
     if (formField === "email") {
+      setEmailErr("");
       setEmail(value);
     }
     if (formField === "password") {
+      setPasswordErr("");
       setPassword(value);
     }
   };

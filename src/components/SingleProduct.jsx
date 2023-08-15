@@ -23,6 +23,17 @@ const SingleProduct = ({ prod }) => {
               <div>4 Days Delivery</div>
             )}
           </Card.Subtitle>
+          <Card.Subtitle>
+            <hr />
+            <p>
+              <em>Description</em>
+            </p>
+            <p>
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Totam
+              reiciendis aspernatur!
+            </p>
+            <hr />
+          </Card.Subtitle>
           <Rating rating={prod.ratings} />
           {cart.some((p) => p.id === prod.id) ? (
             <Button
