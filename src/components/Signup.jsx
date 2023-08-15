@@ -22,6 +22,8 @@ const Signup = () => {
     formField === "email" ? setEmail(value) : setPassword(value);
   };
 
+  const navigate = useNavigate();
+
   const validation = () => {
     return new Promise((resolve, reject) => {
       if (email === "" && password === "") {
@@ -55,6 +57,10 @@ const Signup = () => {
     validation()
       .then((validationErrors) => {
         if (!validationErrors.email && !validationErrors.password) {
+          // Clear the error messages here
+          setEmailErr("");
+          setPasswordErr("");
+
           const attributeList = [
             new CognitoUserAttribute({
               Name: "email",
@@ -74,7 +80,8 @@ const Signup = () => {
               } else {
                 console.log(data);
                 alert("User Added Successfully");
-                setShowMessage(true); // Set the state to show the message
+                setShowMessage(true);
+                navigate("/login");
               }
             }
           );
@@ -94,6 +101,7 @@ const Signup = () => {
             placeholder="Enter email"
             onChange={(e) => formInputChange("email", e.target.value)}
           />
+          {emailErr && <p className="error">{emailErr}</p>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -103,12 +111,14 @@ const Signup = () => {
             placeholder="Password"
             onChange={(e) => formInputChange("password", e.target.value)}
           />
+          {passwordErr && <p className="error">{passwordErr}</p>}
         </Form.Group>
+
         <Button variant="primary" type="submit">
           Submit
         </Button>
       </Form>
-      <Link to="/" className="link">
+      <Link to="/login" className="link">
         Have an account? Sign In.
       </Link>
       {showMessage && <h1>Hey 🙋🏽‍♂️ You can now sign in</h1>}

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { authenticate } from "../services/authenticate";
-import userpool from "../userpool";
 import "./stylesForm.css";
 import { Link } from "react-router-dom";
 
@@ -43,9 +42,6 @@ const Login = () => {
       } else if (password === "") {
         setPasswordErr("Password is required");
         resolve({ email: "", password: "Password is required" });
-      } else if (password.length < 6) {
-        setPasswordErr("must be 6 character");
-        resolve({ email: "", password: "must be 6 character" });
       } else {
         resolve({ email: "", password: "" });
       }
@@ -93,6 +89,7 @@ const Login = () => {
             placeholder="Enter email"
             onChange={(e) => formInputChange("email", e.target.value)}
           />
+          {emailErr && <p className="error">{emailErr}</p>}
         </Form.Group>
 
         <Form.Group className="mb-3" controlId="formBasicPassword">
@@ -102,6 +99,7 @@ const Login = () => {
             placeholder="Password"
             onChange={(e) => formInputChange("password", e.target.value)}
           />
+          {passwordErr && <p className="error">{passwordErr}</p>}
         </Form.Group>
 
         <Button variant="primary" type="submit">
